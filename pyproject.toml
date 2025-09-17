@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "privacy-prompt-library"
-version = "1.0.0"
+version = "1.0.2"
 description = "A privacy-preserving prompt transformation library that redacts disability mentions while maintaining functional context"
 readme = "README.md"
 license = {file = "LICENSE"}

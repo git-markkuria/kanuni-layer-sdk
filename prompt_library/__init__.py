@@ -5,7 +5,7 @@ A privacy-preserving prompt transformation library that redacts disability menti
 while maintaining functional context for AI interactions.
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.2"
 __author__ = "Accessibility Team"
 __email__ = "accessibility@example.com"
 

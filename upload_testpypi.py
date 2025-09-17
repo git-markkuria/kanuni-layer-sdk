@@ -19,8 +19,8 @@ def main():
         sys.executable, '-m', 'twine', 'upload', 
         '--repository', 'testpypi',
         '--verbose',
-        'dist/privacy_prompt_library-1.0.0-py3-none-any.whl',
-        'dist/privacy_prompt_library-1.0.0.tar.gz'
+        'dist/privacy_prompt_library-1.0.2-py3-none-any.whl',
+        'dist/privacy_prompt_library-1.0.2.tar.gz'
     ]
     
     try:
