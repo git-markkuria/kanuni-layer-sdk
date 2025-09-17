@@ -1,0 +1,33 @@
+{
+  "name": "privacy-prompt-library",
+  "version": "1.0.0",
+  "description": "A privacy-preserving prompt transformation library that redacts disability mentions while maintaining functional context",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node tests/test-runner.js",
+    "dev": "node --watch src/index.js",
+    "validate": "node tests/validation.js"
+  },
+  "keywords": [
+    "privacy",
+    "accessibility",
+    "disability",
+    "prompt",
+    "transformation",
+    "ai",
+    "redaction"
+  ],
+  "author": "Accessibility Team",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "helmet": "^7.0.0",
+    "winston": "^3.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
