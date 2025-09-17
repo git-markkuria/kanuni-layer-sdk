@@ -2,6 +2,7 @@ from pathlib import Path
 import json
 import string
 import re
+from importlib.resources import files, as_file
 
 
 def redactor(prompt: str, opted_in: bool) -> str:
@@ -102,15 +103,15 @@ def pwd_redactor(prompt: str) -> str:
         disabilities: dict[str, list[str]] = {}
         disability_lookup: dict[str, str] = {}
 
-        with Path(
-            "C:/Users/briankiragu/Source/hackathons/kanuni-sdk/src/assets/disabilities.json"
-        ).open("r", encoding="utf-8") as fh:
-            disabilities = json.load(fh)
-            disability_lookup: dict[str, str] = {
-                term.lower(): category
-                for category, terms in disabilities.items()
-                for term in terms
-            }
+        # Use importlib.resources so this works when installed from a wheel
+        with as_file(files("kanuni_layer_sdk").joinpath("assets", "disabilities.json")) as disabilities_path:
+            with disabilities_path.open("r", encoding="utf-8") as fh:
+                disabilities = json.load(fh)
+                disability_lookup = {
+                    term.lower(): category
+                    for category, terms in disabilities.items()
+                    for term in terms
+                }
 
         for word in words:
             if word.lower() in disability_lookup.keys():
