@@ -78,9 +78,6 @@ privacy-prompt = "prompt_library.cli:main"
 [tool.hatch.build.targets.wheel]
 packages = ["prompt_library"]
 
-[tool.hatch.build.targets.wheel.force-include]
-"prompt_library/data" = "prompt_library/data"
-
 [tool.black]
 line-length = 100
 target-version = ['py38']
