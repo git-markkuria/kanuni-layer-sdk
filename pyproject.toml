@@ -8,16 +8,22 @@ description = "A SDK for Kanuni"
 authors = [{ name = "Kanuni Team", email = "team@kanuni.com" }]
 keywords = ["kanuni", "sdk", "pwd", "disability"]
 
-
-[tool.hatch.version]
-path = "src/kanuni_sdk/__about__.py"
-
-[tool.hatch.build.targets.wheel]
-packages = ["src/kanuni_sdk"]
-
-dependencies = []
 [project.optional-dependencies]
 dev = ["ruff>=0.12,<1.0"]
+
+[tool.setuptools.dynamic]
+version = { attr = "kanuni_layer_sdk.__version__" }
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "build"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["kanuni_layer_sdk*"]
+
+[tool.setuptools.package-data]
+"kanuni_layer_sdk" = ["assets/*.json"]
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
