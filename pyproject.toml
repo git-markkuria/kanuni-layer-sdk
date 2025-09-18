@@ -8,6 +8,12 @@ description = "A SDK for Kanuni"
 authors = [{ name = "Kanuni Team", email = "team@kanuni.com" }]
 keywords = ["kanuni", "sdk", "pwd", "disability"]
 
+# Add runtime dependencies here:
+dependencies = [
+    "privacy-prompt-library>=1.0.2"
+]
+
+
 [project.optional-dependencies]
 dev = ["ruff>=0.12,<1.0"]
 
