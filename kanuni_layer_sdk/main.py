@@ -1,8 +1,17 @@
 from .modules import redactor, validate_prompt
+from prompt_library import transform_prompt
 
 def reduct(prompt: str, opted_in: bool = True) -> str:
+    #Validate the prompt input
     validated_prompt = validate_prompt(prompt)
-    redacted_prompt =  redactor(validated_prompt, opted_in)
+
+    # Transform by adding context per  the disability info in the prompt
+    transformed_prompt = transform_prompt(validated_prompt)
+    transformed_prompt_output =transformed_prompt['output']
+    print(f"Transformed Prompt:\n {transformed_prompt_output}\n")
+
+    # Redact sensitive information from the prompt if opted in
+    redacted_prompt =  redactor(transformed_prompt_output, opted_in)
     return redacted_prompt
 
 if __name__ == "__main__":
