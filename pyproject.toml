@@ -10,7 +10,7 @@ keywords = ["kanuni", "sdk", "pwd", "disability"]
 
 # Add runtime dependencies here:
 dependencies = [
-    "privacy-prompt-library>=1.0.2"
+    "privacy-prompt-library>=1.2.0"
 ]
 
 

@@ -3,9 +3,10 @@ import json
 import string
 import re
 from importlib.resources import files, as_file
+from typing import Any
 
 
-def redactor(prompt: str, opted_in: bool) -> str:
+def redactor(prompt: str, opted_in: bool) -> dict[str, Any]:
     """
     Extract sensitive information from the prompt and replace with pre-determined phrases.
 
@@ -92,7 +93,7 @@ def pii_redactor(prompt: str) -> str:
     return redacted
 
 
-def pwd_redactor(prompt: str) -> str:
+def pwd_redactor(prompt: str) -> dict[str, Any]:
     try:
         # split on any ASCII punctuation or whitespace characters
         # tokenize into words and keep punctuation as their own items
@@ -112,17 +113,19 @@ def pwd_redactor(prompt: str) -> str:
                     for category, terms in disabilities.items()
                     for term in terms
                 }
-
+        disabilities_categories = []
         for word in words:
             if word.lower() in disability_lookup.keys():
                 category = disability_lookup[word.lower()]
                 redacted_prompt.append(
                     f"[{category.replace('-', ' ')} redacted]"
                 )
+                disabilities_categories.append(category)
             else:
                 redacted_prompt.append(word)
 
-        return " ".join(redacted_prompt)
+        return {"reducted_prompt": " ".join(redacted_prompt),
+                "categories": list(set(disabilities_categories))}
 
     except (FileNotFoundError, json.JSONDecodeError):
         raise FileNotFoundError("Could not find or read disabilities.json")

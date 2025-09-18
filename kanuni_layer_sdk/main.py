@@ -1,26 +1,35 @@
 import asyncio
 import inspect
 from .modules import redactor, validate_prompt
-from prompt_library import transform_prompt
+from prompt_library import transform_multiple_keys as transform_prompt
 
 async def reduct(prompt: str, opted_in: bool = True) -> str:
     #Validate the prompt input
     print("")
     validated_prompt = validate_prompt(prompt)
 
+    # Redact sensitive information from the prompt if opted in
+    redacted_result =  redactor(validated_prompt, opted_in)
+
+    # Extract 'reducted_prompt' and 'categories' robustly (handle string fallback)
+    if isinstance(redacted_result, dict):
+        reducted_prompt = redacted_result.get("reducted_prompt", validated_prompt)
+        categories = redacted_result.get("categories", [])
+    else:
+        reducted_prompt = str(redacted_result)
+        categories = []
+
+    print(f"Redacted Prompt:\n {reducted_prompt}\n\nCategories: {categories}\n")
+
     # Transform by adding context per the disability info in the prompt
     if inspect.iscoroutinefunction(transform_prompt):
-        transformed_prompt = await transform_prompt(validated_prompt)
+        refined_disability_addition = await transform_prompt(categories)
     else:
         # Run sync transform_prompt in a thread to avoid asyncio.run() inside a running loop
-        transformed_prompt = await asyncio.to_thread(transform_prompt, validated_prompt)
+        refined_disability_addition = await asyncio.to_thread(transform_prompt, categories)
+    curated_prompt = f"{reducted_prompt}\n{refined_disability_addition['output']}"
 
-    transformed_prompt_output = transformed_prompt['output']
-    print(f"Enhanced Prompt:\n {transformed_prompt_output}\n")
-
-    # Redact sensitive information from the prompt if opted in
-    redacted_prompt =  redactor(transformed_prompt_output, opted_in)
-    return redacted_prompt
+    return curated_prompt
 
 if __name__ == "__main__":
     response = asyncio.run (
