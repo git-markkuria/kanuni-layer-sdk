@@ -18,7 +18,7 @@ Key goals:
 
 ---
 
-## Quick Start
+## Quick Start -- Template, to be refined as furure work is completed
 
 1. Install the SDK (example for npm / NuGet):
     - npm: `npm install @kanuni/layer-sdk` (example)
@@ -43,7 +43,7 @@ Key goals:
 
 ---
 
-## API: POST /enhance-prompt
+## API: POST /enhance-prompt -- Template, to be refined as furure work is completed
 
 Request body (JSON)
 - OptIn (boolean) — whether the user has opted in to have their disability information redacted
@@ -86,7 +86,7 @@ Example:
 
 ---
 
-## Integration examples
+## Integration examples -- Template, to be refined as furure work is completed
 
 Node.js (express middleware example)
 ```js
@@ -125,7 +125,7 @@ app.MapPost("/ask", async (AskRequest request, KanuniClient kanuni) =>
 
 ---
 
-## Configuration
+## Configuration -- Template, to be refined as furure work is completed
 
 Common environment variables
 - KANUNI_API_KEY — API key for access control (optional but recommended)
@@ -139,16 +139,15 @@ Runtime knobs
 
 ---
 
-## Security & Privacy
+## Security & Privacy 
 
 - Kanuni is opt-in by design. Applications must surface and obtain explicit user consent before redacting or processing disability-identifying information.
 - Minimize logging of raw prompts. When logs are necessary, prefer storing only RedactionMap + hashes, not full original prompt content.
-- Follow your organization’s data retention and access controls. The SDK provides hooks for auditing and secure storage.
 - The SDK does not guarantee legal compliance in all jurisdictions — consult legal and privacy teams.
 
 ---
 
-## Testing & Local Development
+## Testing & Local Development -- Template, to be refined as furure work is completed
 
 - Unit tests: run with your language runtime test runner (example: `npm test` or `dotnet test`).
 - Local server: run using provided sample server configuration, set environment variables to point to a test model or mock service.
